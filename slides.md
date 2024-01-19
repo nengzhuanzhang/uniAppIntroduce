@@ -8,9 +8,9 @@ info: false
 drawings:
   persist: false
 transition: slide-left
-title: 跨平台开发 
+title: 跨平台开发uni-app 
 download: true
-exportFilename: '跨平台开发'
+exportFilename: '跨平台开发uni-app'
 ---
 
 # 跨平台开发uni-app
@@ -229,7 +229,7 @@ layout: two-cols
 
 <div class="mt-16 ml-30">
 
-<img class="w70" src="/vscodePlugin.png" />"
+<img class="w70" src="/vscodePlugin.png" />
 
 </div>
 
