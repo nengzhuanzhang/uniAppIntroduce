@@ -19,6 +19,23 @@ uni-app
 transition: fade-out
 ---
 
+
+# 目录
+- 跨平台开发的诞生
+- 认识uni-app
+- 项目介绍
+  - 创建项目
+  - 项目结构
+  - 调试
+  - 打包
+  - 组件
+- 跨端兼容
+- 拓展
+  - 用VSCode开发uni-app
+  - 骨架屏
+---
+
+
 # 跨平台开发的诞生
 <v-clicks>
 
@@ -29,21 +46,6 @@ transition: fade-out
   - 部署慢
   - 不利于推广等
   - 因此**一套代码，多端运行**的跨平台诞生
-
-</v-clicks>
-
----
-
-# 原生 VS 跨平台
-<v-clicks>
-
-- 原生开发模式的特点
-  - 优点：**性能稳定，用户体验好，安全性高，兼容性好**，可使用手机所有硬件等。
-  - 缺点：开发周期长，维护成本高，迭代慢，部署慢，新版本必须更新应用。不支持跨平台，必须同时开发多端代码。
-  
-- 跨平台开发的特点
-  - 优点：**一套代码，多端运行。** 开发成本低，周期短。
-  - 缺点：适用于和硬件交互少，业务不太复杂的项目。不适合做高性能、用户体验复杂的应用程序。同时开发多端兼容和适配比较麻烦、调试起来不方便。
 
 </v-clicks>
 
@@ -77,28 +79,10 @@ transition: slide-up
 <img class="h-105" src="/uniapp-framework.png" />
 
 ---
-
-# uni-app VS 微信小程序
-<v-clicks>
-
-- 相同点
-  - 接近**原生的体验、打开即用、不需要安装应用**
-  - 有完善的官方文档
-  - 生态圈丰富、组件丰富
-  - 学习成本低
-  
-- 不同点
-  - uni-app 支持跨平台，微信小程序不支持
-  - uni-app 纯Vue体验、高效工程化强；微信小程序工程化弱，使用程序开发语言
-  - uni-app 适合不太复杂的应用；微信小程序的兼容性和稳定性更好
-
-</v-clicks>
-
----
 layout: two-cols
 ---
 
-# 创建uni-app项目
+# 项目介绍-创建uni-app项目
 
 - uni-app 支持两种方式创建项目：
    
@@ -118,7 +102,7 @@ layout: two-cols
 
 ---
 
-# 创建uni-app项目
+# 项目介绍-创建uni-app项目
 
 <v-clicks>
 
@@ -139,7 +123,7 @@ layout: two-cols
 
 ---
 
-# 项目介绍
+# 项目介绍-项目结构
 
 <div class="overflow-auto h-100">
 <v-click>
@@ -178,13 +162,41 @@ layout: two-cols
 
 ---
 
-# 组件
+# 项目介绍-调试
 
+- HBuilderX
+  - Tool -> Setting -> Run -> WeChat Developer Runing Configuration
+  
+- VScode
+  - 执行 ```npm run dev:mp-weixin```
+  - 打开微信开发者工具, 导入此路径 **dist\dev\mp-weixin** 下的代码包 
+---
+
+# 项目介绍-打包
+
+- **微信小程序**
+  ```bash
+  npm run build:mp-weixin
+  ```
+  - 发布
+    1. 打开微信开发者工具，导入 **dist\build\mp-weixin** 代码包，并上传代码；
+    2. 微信公众号后台提交审核。
+   
+- **H5**
+  ```bash
+  npm run build:h5
+  ```
+
+- **Android & IOS**
+  - 如果打包成 App 端，将项目代码导入 HbuilderX 开发工具，由 HbuilderX 运行到真机或模拟器，提供原生App云打包服务。  
+
+---
+
+# 项目介绍-组件
 
 - [内置组件](https://uniapp.dcloud.net.cn/component/view.html)
 - [扩展组件（uni-ui）](https://uniapp.dcloud.net.cn/component/view.html)：uni-ui是DCloud提供的一个跨端ui库，它是基于vue组件的、flex布局的、无dom的跨全端ui框架，它是**内置组件的补充**。
 - [easycom](https://uniapp.dcloud.net.cn/collocation/pages.html#easycom): **HBuilderX 2.5.5**起支持**easycom**组件模式。
-
 
 ```json
 // pages.json
@@ -204,109 +216,6 @@ layout: two-cols
 }
 ```
 
-<style>
-  img{
-    width:40%;
-  }
-</style>
-
----
-layout: two-cols
----
-
-# 用VSCode开发uni-app
-
-- **为什么选择 VSCode ？** 
-  - 对 TS 类型支持暂不完善 
-  - VSCode 对 TS 类型支持友好，熟悉的编辑器
-  
-- **VScode 安装uni-app插件**
-  - **uni-create-view** ：快速创建 uni-app 页面
-  - **uni-helper** ：uni-app 代码提示
-  - **uniapp 小程序扩展** ：鼠标悬停查文档
-  
-::right::
-
-<div class="mt-16 ml-30">
-
-<img class="w70" src="/vscodePlugin.png" />
-
-</div>
-
----
-
-# 用VSCode开发uni-app
-<v-click>
-
-- ts 类型校验
-  - 安装类型声明文件:
-    ```bash
-    npm i -D @types/wechat-miniprogram @uni-helper/uni-app-types
-    ```
-
-  - 配置 tsconfig.json
-  
-  <div class="overflow-auto h-60">
-
-  ```json
-      {
-        "compilerOptions": {
-          "types": [
-            "@dcloudio/types",
-            "miniprogram-api-typings",
-            "@uni-helper/uni-app-types",
-            "@uni-helper/uni-ui-types"
-          ]
-        },
-        "vueCompilerOptions": {
-          // experimentalRuntimeMode 已废弃，现调整为 nativeTags，请升级 Volar 插件至最新版本
-          "nativeTags": ["block", "component", "template", "slot"]
-        },
-      }
-    ```
-  </div>
-
-</v-click>
-
----
-
-# 用VSCode开发uni-app
-<v-click>
-
-- json 注释问题
-![jsonc](/jsonc.png)
-
-</v-click>
-
----
-
-# 微信开发者工具调试
-
-- HBuilderX
-  - Tool -> Setting -> Run -> WeChat Developer Runing Configuration
-  
-- VScode
-  - 执行 ```npm run dev:mp-weixin```
-  - 打开微信开发者工具, 导入此路径 **dist\dev\mp-weixin** 下的代码包 
----
-
-# 项目打包
-
-- **微信小程序**
-  ```bash
-  npm run build:mp-weixin
-  ```
-  - 发布
-    1. 打开微信开发者工具，导入 **dist\build\mp-weixin** 代码包，并上传代码；
-    2. 微信公众号后台提交审核。
-   
-- **H5**
-  ```bash
-  npm run build:h5
-  ```
-
-- **Android & IOS**
-  - 如果打包成 App 端，将项目代码导入 HbuilderX 开发工具，由 HbuilderX 运行到真机或模拟器，提供原生App云打包服务。  
 ---
 
 # 跨端兼容
@@ -343,9 +252,86 @@ layout: two-cols
 - JSAPI兼容
   - 非H5端，不支持window、document等浏览器的JSAPI。
   
+
+---
+layout: two-cols
+class: my-content
 ---
 
-# 骨架屏
+# 拓展-用VSCode开发uni-app
+
+- **为什么选择 VSCode ？** 
+  - 对 TS 类型支持暂不完善 
+  - VSCode 对 TS 类型支持友好，熟悉的编辑器
+  
+- **VScode 安装uni-app插件**
+  - **uni-create-view** ：快速创建 uni-app 页面
+  - **uni-helper** ：uni-app 代码提示
+  - **uniapp 小程序扩展** ：鼠标悬停查文档
+  
+::right::
+
+<div class="mt-16 ml-30">
+
+<img class="w70" src="/vscodePlugin.png" />
+
+</div>
+
+<style>
+  .my-content h1{
+    font-size:2rem;
+  }
+</style>
+
+---
+
+# 拓展-用VSCode开发uni-app
+<v-click>
+
+- ts 类型校验
+  - 安装类型声明文件:
+    ```bash
+    npm i -D @types/wechat-miniprogram @uni-helper/uni-app-types
+    ```
+
+  - 配置 tsconfig.json
+  
+  <div class="overflow-auto h-60">
+
+  ```json
+      {
+        "compilerOptions": {
+          "types": [
+            "@dcloudio/types",
+            "miniprogram-api-typings",
+            "@uni-helper/uni-app-types",
+            "@uni-helper/uni-ui-types"
+          ]
+        },
+        "vueCompilerOptions": {
+          // experimentalRuntimeMode 已废弃，现调整为 nativeTags，请升级 Volar 插件至最新版本
+          "nativeTags": ["block", "component", "template", "slot"]
+        },
+      }
+    ```
+  </div>
+
+</v-click>
+
+---
+
+# 拓展-用VSCode开发uni-app
+<v-click>
+
+- json 注释问题
+![jsonc](/jsonc.png)
+
+</v-click>
+
+
+---
+
+# 拓展-骨架屏
 
 <div class="flex justify-between content-start">
 
